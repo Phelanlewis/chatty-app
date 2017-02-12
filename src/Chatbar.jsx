@@ -37,7 +37,6 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input
           className="chatbar-username"
-
           // this is the value for the onUsernameChangeHandler in event.target.value
           value={this.state.username}
           // onChange binds this to the event

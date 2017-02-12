@@ -35,13 +35,18 @@ this.state = {
     let oldUsername = this.state.currentUser.username;
     this.setState({ currentUser: {username: currentUser.username}});
 
+    let content = `${oldUsername} has become ${currentUser.username}`;
+
+    if(oldUsername !== currentUser.username){
     let newUserName = {
-      currentUser: currentUser.username,
-      oldUsername,
-      type: "nameUpdate"
-    }
+      content: content,
+      type: "postNotification"
+    };
 
     this.socket.send(JSON.stringify(newUserName));
+    } else {
+      return;
+    } 
   }
 
   componentDidMount() {
@@ -55,22 +60,20 @@ this.state = {
       const content = sentMessage.content;
 
 
-    if (sentMessage.type === "incomingMessage") {
+    if (type === "incomingMessage") {
       let oldMessage = this.state.messages;
+      console.log(sentMessage);
       let totalMessage = oldMessage.concat(sentMessage);
+      // console.log(totalMessage);
       this.setState({ messages: totalMessage });
     }
 
-    if (type === "changeCurrentUser") {
-      data.content = `${data.oldUsername} has become ${data.currentUser}`;
-      console.log(data);
-      console.log(data.content);
+    if (type === "incomingNotification") {
       let oldMessage = this.state.messages;
+      console.log(sentMessage);
       let totalMessage = oldMessage.concat(sentMessage);
       this.setState({ messages: totalMessage });
-    } else {
-      return;
-    }
+      }
 
     if (type === "numberOfUsersOnline") {
         this.setState({numberOfUsersOnline: data.numberOfUsersOnline})
