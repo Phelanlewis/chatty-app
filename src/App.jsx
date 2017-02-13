@@ -12,7 +12,7 @@ class App extends Component {
 this.state = {
    currentUser: {username: "Anonymous"},
    messages: [],
-   numberOfUsersOnline: 0
+   userCount: 0
  }
 }
 
@@ -46,7 +46,7 @@ this.state = {
     this.socket.send(JSON.stringify(newUserName));
     } else {
       return;
-    } 
+    }
   }
 
   componentDidMount() {
@@ -58,13 +58,12 @@ this.state = {
       const sentMessage = JSON.parse(event.data);
       const type = sentMessage.type;
       const content = sentMessage.content;
-
+      console.log(sentMessage);
 
     if (type === "incomingMessage") {
       let oldMessage = this.state.messages;
       console.log(sentMessage);
       let totalMessage = oldMessage.concat(sentMessage);
-      // console.log(totalMessage);
       this.setState({ messages: totalMessage });
     }
 
@@ -75,9 +74,13 @@ this.state = {
       this.setState({ messages: totalMessage });
       }
 
-    if (type === "numberOfUsersOnline") {
-        this.setState({numberOfUsersOnline: data.numberOfUsersOnline})
-      }
+    if (type === "userCount") {
+      const oldCount = this.state.userCount;
+      // console.log(oldCount);
+      const newUserCount = sentMessage.userCount + oldCount;
+      // console.log(sentMessage.userCount);
+      this.setState({ userCount: newUserCount });
+    }
   }
 
     this.socket.onopen = (event) => {
@@ -94,8 +97,10 @@ this.state = {
   render() {
     return (
       <div>
-         <p>Number of users online: {this.state.numberOfUsersOnline}</p>
-        <Navbar />
+
+        <Navbar
+          count={this.state.userCount}
+        />
         <MessageList
           messages={this.state.messages}
           currentUser={this.state.currentUser}
