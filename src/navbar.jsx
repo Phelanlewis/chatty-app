@@ -5,8 +5,8 @@ class Navbar extends Component {
     return (
       <nav className="navbar">
         <a href="/" className="navbar-brand">Chatty</a>
-        <p>There are { this.props.count } users online
-        </p>
+        <div className="counter">There {this.props.count == 1 ? 'is' : 'are'} { this.props.count } { this.props.count == 1 ? 'user' : 'users' } online
+        </div>
       </nav>
     );
   }
