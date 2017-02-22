@@ -34,7 +34,7 @@ wss.on('connection', (socket) => {
     if (parseMessage.type === "postMessage") {
       newMessage = {
         type: "incomingMessage",
-        id: uuid.v1(),
+        key: uuid.v1(),
         username: parseMessage.username,
         content: parseMessage.content
       };
@@ -44,7 +44,7 @@ wss.on('connection', (socket) => {
     if (parseMessage.type === "postNotification") {
       newMessage = {
         type: "incomingNotification",
-        id: uuid.v4(),
+        key: uuid.v4(),
         content: parseMessage.content
       };
       console.log(newMessage);
