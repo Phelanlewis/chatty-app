@@ -3,11 +3,11 @@ import React, {Component} from 'react';
 class Message extends Component {
   render() {
     return (
-      <div className="message">
-        <span className="message-username">
+      <div className={`message ${this.props.type === 'incomingNotification' ? 'system' : ''}`}>
+        <span className="username">
           {this.props.username}
         </span>
-        <span className="message-content">
+        <span className="content">
           {this.props.content}
         </span>
       </div>

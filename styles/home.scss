@@ -39,30 +39,35 @@ body {
   flex: 2;
 }
 
-.message {
+#message-list {
+  height: calc(100vh - 131px);
+  padding: 16px 8px;
+}
+
+#message-list .message {
+  padding: 4px 0;
   display: flex;
-  padding: 5px;
 }
 
-.message.system {
-  font-style: italic;
-  padding: 5px 20px;
+#message-list .message .username,#message-list .message .content {
+  display: inline-block;
+  padding: 4px 0;
 }
 
-.message-content,
-.message-username {
+#message-list .message .username {
+  flex: 15;
+  margin-right: 16px;
   overflow: hidden;
-  margin: 5px;
-  padding: 0 10px;
-}
-
-.message-content {
-  flex: 8;
-}
-
-.message-username {
-  flex: 2;
   font-weight: 700;
+}
+
+#message-list .message .content {
+  flex: 85;
+}
+
+#message-list .message.system {
+  font-weight: 400;
+  font-style: italic;
 }
 
 .navbar {
@@ -90,5 +95,5 @@ body {
 
 .counter {
   text-align: right;
-  line-height: 30px;
+  line-height: 40px;
 }

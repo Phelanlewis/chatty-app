@@ -4,7 +4,7 @@ class Chatbar extends Component {
   constructor(props) {
   super(props);
   this.state = {
-    username: props.currentUser,
+    username: '',
     content: ''
     }
   }
@@ -37,6 +37,7 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input
           className="chatbar-username"
+          placeholder="Your Name (Optional)"
           // this is the value for the onUsernameChangeHandler in event.target.value
           value={this.state.username}
           // onChange binds this to the event
